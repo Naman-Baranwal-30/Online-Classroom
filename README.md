@@ -1,0 +1,2 @@
+# Online-Classroom
+I created a project on online classroom. It has been built for Teachers and students. The main features of this project are: 1.Classes and quizzes can be made from teachers end. 2.Students can join respective classes using a unique classcode and can attempt quizzes and see their scores immediately after attempting the quiz. Technology used in making is PHP and mysql using xampp and AJAX for backend and html for frontend.

@@ -1,0 +1,283 @@
+<?php
+include'db.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Classroom</title>
+</head>
+<style>
+body {
+    
+    background-image: url('https://www.leadquizzes.com/wp-content/uploads/2019/02/New-blog-graphic.jpg');
+background-repeat: no-repeat;
+background-size:cover;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000066;
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align:center;
+  padding: 34px 16px;
+  text-decoration: none;
+  font-family: 'Numans', sans-serif;
+}
+
+li a:hover:not(.active) {
+  background-color: #660066;
+}
+
+
+.glow-on-hover {
+    width: 320px;
+    height: 80px;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    background: #660033;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-size: 25px;
+     font-weight: bold;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -5px;
+    left:-5px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #660066
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: ff0000;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+.font1
+{
+  font-family: 'Numans', sans-serif;
+  font-weight: bold;
+  color:#ff0000
+}
+.font2
+{
+  font-family: 'Numans', sans-serif;
+  font-weight: bold;
+  color:#ffffff;
+}
+.font3
+{
+  font-family: 'Numans', sans-serif;
+  font-weight: bold;
+  color:#ffffff;
+margin:10px;
+}
+.font4
+{
+  font-family: 'Numans', sans-serif;
+  font-weight: bold;
+  color:#ffffff;
+  font-size: 25px;
+}
+.clr
+{
+    color:#00cc00;
+}
+.myButton {
+    box-shadow:inset 0px -3px 7px 0px #3dc21b;
+    background:linear-gradient(to bottom, #0de32d 5%, #5cbf2a 100%);
+    background-color:#0de32d;
+    border-radius:3px;
+    border:1px solid #18ab29;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    padding:9px 23px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+    object-position: center;
+
+}
+.myButton:hover {
+    background:linear-gradient(to bottom, #5cbf2a 5%, #0de32d 100%);
+    background-color:#5cbf2a;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+</style>
+
+<ul>
+    <li><a href="selectclass.php" class=font2>Select class</a></li>
+  <li><a href="createclass0.php">Create Class</a></li>
+  <li><a href="quizzesmade.php">Quizzes made</a></li>   
+  
+  
+</ul>
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Classroom</title>
+ 
+<style>
+        .topnav {
+            background-color:  #000066;
+            overflow: hidden;
+        }
+
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .topnav .icon {
+            display: none;
+        }
+    </style>
+</head>
+<div id="list">
+  
+</div>
+
+<div id="list1">
+  
+</div>
+<h1 id="mdisplay"></h1>
+</body>
+
+</html>
+
+<?php
+
+//include'new.php';
+$cc2=$_POST['classcode2'];
+$q1="SELECT stuid FROM joinclass where classid='$cc2'";
+$result3=mysqli_query($connection,$q1);
+$_SESSION['cc2']=$cc2;
+echo'<table>';
+if(mysqli_num_rows($result3) > 0){
+while($row = $result3->fetch_assoc())
+{
+  echo''.$row['stuid'].'';
+  $stuid=$row['stuid'];
+
+ $q2="SELECT * from studentdetails where stuid='$stuid'";
+   $result2=mysqli_query($connection,$q2); 
+  if(mysqli_num_rows($result2) > 0){
+while($row1 = $result2->fetch_assoc())
+{
+  $id=$row1['stuid'];
+  echo'<tr> <td>'.$row1['sname'].'</td><td>'.$row1['syear'].'</td><td>'.$row1['semail'].'</td><td><button class="delete" id='.$id.'class="btn btn-danger">delete</button></td></tr>';
+}}}}
+echo'</table>';
+?><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  
+<script>
+$(document).ready(function(){
+ //$("#div1").load("back1.php");
+    // Delete 
+    $('.delete').click(function(){
+        var el = this;
+
+        // Delete id
+      var id = $(this).attr('id');
+        
+        var confirmalert = confirm("Are you sure?");
+        if (confirmalert == true) {
+            // AJAX Request
+            $.ajax({
+                url: 'delete.php',
+                type: 'POST',
+                data: { id:id },
+                success: function(response){
+    
+   //                if(response == 1){
+                        // Remove row from HTML Table
+                             $(el).closest('tr').css('background','tomato');
+                        $(el).closest('tr').fadeOut(800,function(){
+                            $(this).remove();
+                        });
+                            //$("#div1").load("back1.php");
+                       // });
+                        
+     //               }
+                
+            }
+            });
+        }
+        });
+
+     });
+</script>

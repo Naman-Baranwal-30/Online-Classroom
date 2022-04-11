@@ -209,7 +209,7 @@ th, td {
 
 $stuid=$_SESSION['sid'];
 $q12="SELECT * FROM quizattempt where stuid='$stuid'";
-$result3=mysqli_query($connection,$q12);
+$result3=mysqli_query($connection,$q12);//mysql query being executed
 echo'<table style="width:100%">
 <tr>
     <th class=font2>QUIZNAME</th>

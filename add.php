@@ -153,12 +153,7 @@ $row=mysqli_fetch_array($r8);
 $row1=mysqli_fetch_array($r9);
 $quizid=$row1['quizid'];
 echo'quizid'.$quizid.''; 
-//$code=$row[0];
-//$code1=$row[1];
-//	echo'code:'.$code.'<br>';
-//	echo'code1:'.$code1.'<br>';
-//	$q9="SELECT quizname from quiz where quizid='$code'";
-//	$r9=mysqli_query($connection,$q9);
+
 	$correct_choice = $_POST['correct_choice'];
 	//echo ''.$quizsubject.' hello';
 	// Choice Array
